@@ -74,6 +74,20 @@ Any deviation from the architecture requires an ADR in [`docs/adr/`](docs/adr/),
 
 ---
 
+## Detailed conventions (the "how")
+
+This file holds the absolute rules. The applied, example-driven standards live in the
+[conventions library](docs/conventions/) — read the relevant one before writing code:
+
+- [Coding standards](docs/conventions/coding-standards.md) — Clean Code for TS + React
+- [Architecture principles](docs/conventions/architecture-principles.md) — Clean Architecture applied
+- [Testing conventions](docs/conventions/testing-conventions.md)
+- [API integration](docs/conventions/api-integration.md)
+- [UI, styling & i18n](docs/conventions/ui-styling-and-i18n.md)
+- [Git & pull requests](docs/conventions/git-and-pull-requests.md)
+
+---
+
 ## The team & who owns what
 
 The project runs with **3 human members** and **8 virtual teammates**. Each virtual
@@ -118,12 +132,17 @@ Follow this order — it is a TDD loop, not a suggestion:
 - **Coverage:** ≥80% statements/lines, ≥75% branches, ≥85% functions (generated `src/api/` excluded).
 - **SonarCloud Quality Gate:** A ratings for Reliability/Security/Maintainability; 100% hotspots
   reviewed; <3% duplication on new code; cognitive complexity ≤15/function. **Blocks merge.**
-- **ESLint critical rules:** `no-explicit-any` (error), `no-non-null-assertion` (error),
-  `react-hooks/exhaustive-deps` (error), `import/no-cycle` (error), `no-console` (warn).
+- **ESLint critical rules (all `error`):** `no-explicit-any`, `no-non-null-assertion`,
+  `ban-ts-comment`, `react-hooks/exhaustive-deps`, `import/no-cycle`, `react/no-danger`,
+  the full `jsx-a11y` recommended set, a `no-restricted-syntax` rule banning hardcoded palette
+  colours, and **`boundaries/dependencies`** — which blocks cross-feature imports (a feature may
+  import `shared`/`api`/`styles` and only its own slice). `no-console` is a warning.
+- **Performance gate:** `npm run check:bundle` fails when the gzipped bundle exceeds budget
+  (see [`docs/performance/budgets.md`](docs/performance/budgets.md)).
 - **Pre-commit:** `lint-staged` → eslint --fix → prettier → `tsc --noEmit`; `commitlint`
   (Conventional Commits: `feat|fix|chore|docs|test|refactor|perf(scope): description`).
 - **CI (every PR):** type-check → lint → unit + coverage → SonarCloud → `npm audit`
-  (critical = fail) → Vite build → bundle report. Cypress E2E nightly + on release branches.
+  (critical = fail) → Vite build → bundle-budget check. Cypress E2E nightly + on release branches.
 
 ---
 

@@ -202,6 +202,10 @@
             { label: 'Vite 6 build & dev server', status: 'green' },
             { label: 'TypeScript 5 (strict)', status: 'green', note: 'type-check passes' },
             { label: 'ESLint 9 flat config', status: 'green', note: 'lint passes' },
+            { label: 'Feature-boundary lint', status: 'green', note: 'boundaries/dependencies' },
+            { label: 'a11y lint (jsx-a11y)', status: 'green' },
+            { label: 'No-hardcoded-colour rule', status: 'green' },
+            { label: 'Test-quality lint', status: 'green', note: 'testing-library + jest-dom' },
             { label: 'Prettier', status: 'green' },
             {
               label: 'Jest + RTL + jest-axe',
@@ -269,6 +273,7 @@
             { label: 'AGENTS.md', status: 'green' },
             { label: 'docs/Technical-Architecture-Plan.md', status: 'green' },
             { label: 'docs/agents/* (8 role cards)', status: 'green' },
+            { label: 'docs/conventions/* (6 standards)', status: 'green' },
             { label: 'docs/adr/ (template + ADR-0001)', status: 'green' },
             { label: 'docs/specs/ (Scope)', status: 'green', note: 'scaffolded, empty until WP1' },
             {
@@ -286,7 +291,12 @@
         {
           title: 'Performance (embedded Linux + nginx)',
           items: [
-            { label: 'Bundle vendor chunking', status: 'green', note: '~122 KB gz, under budget' },
+            { label: 'Bundle vendor chunking', status: 'green', note: '~119 KB gz, under budget' },
+            {
+              label: 'Bundle budget gate',
+              status: 'green',
+              note: 'npm run check:bundle (fails over budget)',
+            },
             {
               label: 'Route-based code splitting',
               status: 'blue',
