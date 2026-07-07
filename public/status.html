@@ -242,7 +242,11 @@
             },
             { label: 'Storybook 8', status: 'green', note: 'builds' },
             { label: 'Husky pre-commit / commit-msg', status: 'green' },
-            { label: 'GitHub Actions CI', status: 'blue', note: 'WP0 remaining' },
+            {
+              label: 'GitHub Actions CI',
+              status: 'green',
+              note: 'type-check · lint · test · build · bundle · audit',
+            },
             { label: 'SonarCloud Quality Gate', status: 'blue', note: 'needs project setup' },
           ],
         },

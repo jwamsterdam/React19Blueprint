@@ -1,5 +1,7 @@
 # Configuration Tool — Front-End
 
+[![CI](https://github.com/jwamsterdam/React19Blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/jwamsterdam/React19Blueprint/actions/workflows/ci.yml)
+
 Enterprise-grade **React 19** front-end blueprint for a **hardware configuration tool** —
 a single application for configuring a family of network-connected devices, from user
 accounts and hardware composition to zones, actions, audio processing, diagnostics and an
