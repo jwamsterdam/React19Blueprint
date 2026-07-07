@@ -232,6 +232,7 @@ Ordered to respect dependencies and the mid-2027 intermediate milestone
 - [`AGENTS.md`](AGENTS.md) — root context & absolute rules for all (human + AI) contributors
 - [`docs/Technical-Architecture-Plan.md`](docs/Technical-Architecture-Plan.md) — full technical architecture (source of truth)
 - [`docs/agents/`](docs/agents/) — role-specific instruction files for each virtual teammate
+- [`docs/delivery-workflow.md`](docs/delivery-workflow.md) — steering model + review routing matrix
 - [`docs/conventions/`](docs/conventions/) — applied coding, architecture, testing, API, UI & git standards
 - [`docs/adr/`](docs/adr/) — Architecture Decision Records (+ [template](docs/adr/template.md))
 - [`docs/specs/`](docs/specs/) — durable feature acceptance criteria (owned by Scope)

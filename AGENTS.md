@@ -125,6 +125,10 @@ Follow this order — it is a TDD loop, not a suggestion:
 8. **Watt** checks performance budgets on perf-sensitive changes (measured under device-like throttling).
 9. A **human** reviews and approves the PR.
 
+Not every teammate reviews every change — steps 5–8 are applied per the **review routing
+matrix** in [`docs/delivery-workflow.md`](docs/delivery-workflow.md), which maps each change
+type to its required reviewers.
+
 ---
 
 ## Quality bar (enforced, not aspirational)
