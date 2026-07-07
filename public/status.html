@@ -98,6 +98,24 @@
         padding-bottom: 8px;
         margin-bottom: 12px;
       }
+      h3.subhead {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 22px 0 10px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+      }
+      .subnote {
+        text-transform: none;
+        letter-spacing: normal;
+        font-weight: 400;
+        font-size: 0.78rem;
+        color: var(--muted);
+        max-width: 74ch;
+      }
       ul {
         list-style: none;
         margin: 0;
@@ -175,12 +193,22 @@
       </div>
 
       <section>
-        <h2>Live environment probes</h2>
+        <h2>Live checks</h2>
         <div class="bar">
           <button id="refresh">Re-run probes</button>
           <span id="checked"></span>
         </div>
         <ul id="probes"></ul>
+
+        <h3 class="subhead">
+          Integration readiness
+          <span class="subnote"
+            >optional — the front-end is developed against MSW mocks; these only go green once MSW
+            is active or a real backend is reachable, and are not required for the skeleton
+            itself</span
+          >
+        </h3>
+        <ul id="integration-probes"></ul>
       </section>
 
       <section id="manifest-root"></section>
@@ -353,13 +381,39 @@
       }
 
       async function runProbes() {
+        // Core front-end signal: the dev server is serving this page.
         const list = document.getElementById('probes');
         list.innerHTML = '';
         list.appendChild(probeItem('Dev server (this page)', 'green', location.origin));
 
+        // Integration readiness (optional — mocked in dev via MSW).
+        const integ = document.getElementById('integration-probes');
+        integ.innerHTML = '';
+
+        // MSW mock worker — the front-end's actual dev-time data source.
+        const msw = probeItem('MSW mock worker', 'amber', 'checking…');
+        integ.appendChild(msw);
+        try {
+          const regs = navigator.serviceWorker
+            ? await navigator.serviceWorker.getRegistrations()
+            : [];
+          const active = regs.some((r) =>
+            (r.active?.scriptURL ?? '').includes('mockServiceWorker'),
+          );
+          msw.replaceWith(
+            probeItem(
+              'MSW mock worker',
+              active ? 'green' : 'blue',
+              active ? 'intercepting requests' : 'not registered yet (WP0 remaining)',
+            ),
+          );
+        } catch {
+          msw.replaceWith(probeItem('MSW mock worker', 'blue', 'not registered yet'));
+        }
+
         // REST health check.
         const rest = probeItem('REST API', 'amber', CONFIG.restHealthUrl + ' — checking…');
-        list.appendChild(rest);
+        integ.appendChild(rest);
         try {
           const res = await fetch(CONFIG.restHealthUrl, {
             method: 'GET',
@@ -391,7 +445,7 @@
 
         // WebSocket check.
         const ws = probeItem('WebSocket', 'amber', CONFIG.wsUrl + ' — connecting…');
-        list.appendChild(ws);
+        integ.appendChild(ws);
         try {
           const socket = new WebSocket(CONFIG.wsUrl);
           const timer = setTimeout(() => {
