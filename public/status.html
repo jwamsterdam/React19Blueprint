@@ -238,7 +238,7 @@
             {
               label: 'Jest + RTL + jest-axe',
               status: 'green',
-              note: '10 tests, coverage gate met',
+              note: '28 tests, coverage gate met',
             },
             { label: 'Storybook 8', status: 'green', note: 'builds' },
             { label: 'Cypress E2E', status: 'blue', note: 'config + specs pending (WP0)' },
@@ -279,13 +279,22 @@
           items: [
             { label: 'REST codegen (openapi-ts)', status: 'blue', note: 'needs openapi.yaml' },
             { label: 'WS codegen (asyncapi)', status: 'blue', note: 'needs asyncapi.yaml' },
-            { label: 'MSW mock handlers', status: 'blue', note: 'WP0 remaining' },
+            {
+              label: 'MSW mock handlers',
+              status: 'green',
+              note: 'health + zones; dev worker active',
+            },
           ],
         },
         {
           title: 'Features (Work Packages)',
           items: [
             { label: 'Dashboard (sample slice)', status: 'green' },
+            {
+              label: 'Zones (reference slice)',
+              status: 'green',
+              note: 'full stack: query+mutation, RHF+Zod, Jotai, MSW, tests, story, i18n',
+            },
             { label: 'WP1 · Auth', status: 'blue' },
             { label: 'WP2 · Configuration Wizard', status: 'blue' },
             { label: 'WP3 · User Management', status: 'blue' },
@@ -343,8 +352,8 @@
             },
             {
               label: 'Route-based code splitting',
-              status: 'blue',
-              note: 'lazy routes with features',
+              status: 'green',
+              note: '/zones lazy-loaded as its own chunk',
             },
             { label: 'Lighthouse CI (@lhci/cli)', status: 'blue', note: 'needs dep approval' },
             {
@@ -420,7 +429,9 @@
             probeItem(
               'MSW mock worker',
               active ? 'green' : 'blue',
-              active ? 'intercepting requests' : 'not registered yet (WP0 remaining)',
+              active
+                ? 'intercepting requests'
+                : 'inactive on this standalone page — load the app (e.g. /zones) to register it',
             ),
           );
         } catch {
