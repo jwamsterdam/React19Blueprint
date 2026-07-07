@@ -67,10 +67,13 @@ If a change spans several types, take the **union** of reviewers.
   their approval required.
 - **CI gate (Flux) → automated.** The Actions workflow runs type-check, lint, test, build, and the
   bundle/audit gates on every PR.
-- **Virtual reviewers → procedure.** Virtual teammates are not GitHub accounts, so the author
-  declares the change type in the [PR template](../.github/pull_request_template.md) and runs the
-  matrix's reviewers in Claude Code / Codex using their [role cards](agents/). _(Optional future
-  automation: a slash command that spawns the right role-carded subagents against the diff.)_
+- **Virtual reviewers → procedure, with automation.** Virtual teammates are not GitHub accounts,
+  so the author declares the change type in the [PR template](../.github/pull_request_template.md).
+  Each teammate is a Claude Code **subagent** in [`.claude/agents/`](../.claude/agents/) (read-only,
+  pointing at its [role card](agents/)). Run the **`/route-review`** command
+  ([`.claude/commands/route-review.md`](../.claude/commands/route-review.md)) to auto-detect the
+  change type, dispatch exactly the required reviewers against the diff, and get a consolidated
+  report. The reviewers advise; humans still approve.
 
 ## What "review" means per role
 
