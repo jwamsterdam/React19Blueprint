@@ -119,19 +119,20 @@ src/
 
 ## 4. Team
 
-A hybrid team of **3 human members** and **7 virtual (AI) teammates**. Each virtual
+A hybrid team of **3 human members** and **8 virtual (AI) teammates**. Each virtual
 teammate reads a role-specific instruction file so that AI-assisted ("vibe") coding stays
 architecture-compliant and consistent. See [`AGENTS.md`](AGENTS.md) for the full charter.
 
-| Human | Role                       | Virtual teammate | Role                 | Instruction file                                                       |
-| ----- | -------------------------- | ---------------- | -------------------- | ---------------------------------------------------------------------- |
-| —     | Solution Architect         | **Solid**        | Solution Architect   | [`docs/agents/SolutionArchitect.md`](docs/agents/SolutionArchitect.md) |
-| —     | Senior Front-end Developer | **Vibe**         | Developer            | [`docs/agents/Developer.md`](docs/agents/Developer.md)                 |
-| —     | Business Analyst           | **Scope**        | Business Analyst     | [`docs/agents/BusinessAnalyst.md`](docs/agents/BusinessAnalyst.md)     |
-|       |                            | **Probe**        | Tester / QA          | [`docs/agents/Tester.md`](docs/agents/Tester.md)                       |
-|       |                            | **Aegis**        | Security specialist  | [`docs/agents/Security.md`](docs/agents/Security.md)                   |
-|       |                            | **Pixel**        | UX / Design Guardian | [`docs/agents/UXGuardian.md`](docs/agents/UXGuardian.md)               |
-|       |                            | **Flux**         | DevOps               | [`docs/agents/DevOps.md`](docs/agents/DevOps.md)                       |
+| Human | Role                       | Virtual teammate | Role                 | Instruction file                                                           |
+| ----- | -------------------------- | ---------------- | -------------------- | -------------------------------------------------------------------------- |
+| —     | Solution Architect         | **Solid**        | Solution Architect   | [`docs/agents/SolutionArchitect.md`](docs/agents/SolutionArchitect.md)     |
+| —     | Senior Front-end Developer | **Vibe**         | Developer            | [`docs/agents/Developer.md`](docs/agents/Developer.md)                     |
+| —     | Business Analyst           | **Scope**        | Business Analyst     | [`docs/agents/BusinessAnalyst.md`](docs/agents/BusinessAnalyst.md)         |
+|       |                            | **Probe**        | Tester / QA          | [`docs/agents/Tester.md`](docs/agents/Tester.md)                           |
+|       |                            | **Aegis**        | Security specialist  | [`docs/agents/Security.md`](docs/agents/Security.md)                       |
+|       |                            | **Pixel**        | UX / Design Guardian | [`docs/agents/UXGuardian.md`](docs/agents/UXGuardian.md)                   |
+|       |                            | **Flux**         | DevOps               | [`docs/agents/DevOps.md`](docs/agents/DevOps.md)                           |
+|       |                            | **Watt**         | Performance Engineer | [`docs/agents/PerformanceEngineer.md`](docs/agents/PerformanceEngineer.md) |
 
 **Per-sprint working method (TDD discipline)**
 
@@ -141,7 +142,8 @@ architecture-compliant and consistent. See [`AGENTS.md`](AGENTS.md) for the full
 4. **Solid** reviews the PR for architecture-boundary compliance (ADR for any deviation).
 5. **Pixel** verifies visual output against Figma (via Storybook).
 6. **Aegis** reviews security-sensitive areas against the OWASP checklist.
-7. CI validates everything automatically.
+7. **Watt** checks performance budgets on perf-sensitive changes (device-like throttling).
+8. CI validates everything automatically.
 
 ---
 
@@ -226,7 +228,10 @@ Ordered to respect dependencies and the mid-2027 intermediate milestone
 - [`AGENTS.md`](AGENTS.md) — root context & absolute rules for all (human + AI) contributors
 - [`docs/Technical-Architecture-Plan.md`](docs/Technical-Architecture-Plan.md) — full technical architecture (source of truth)
 - [`docs/agents/`](docs/agents/) — role-specific instruction files for each virtual teammate
-- [`docs/adr/`](docs/adr/) — Architecture Decision Records
+- [`docs/adr/`](docs/adr/) — Architecture Decision Records (+ [template](docs/adr/template.md))
+- [`docs/specs/`](docs/specs/) — durable feature acceptance criteria (owned by Scope)
+- [`docs/design-notes/`](docs/design-notes/) — design-fidelity findings & Figma extensions (owned by Pixel)
+- [`docs/performance/`](docs/performance/) — performance budgets & reports (owned by Watt)
 
 ---
 

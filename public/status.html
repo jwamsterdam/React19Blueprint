@@ -26,7 +26,12 @@
       }
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
         background: var(--bg);
         color: var(--fg);
         line-height: 1.5;
@@ -157,7 +162,9 @@
     <div class="wrap">
       <header>
         <h1>Skeleton Status</h1>
-        <p>Configuration Tool — front-end blueprint · dev-only diagnostic (delete before delivery)</p>
+        <p>
+          Configuration Tool — front-end blueprint · dev-only diagnostic (delete before delivery)
+        </p>
       </header>
 
       <div class="legend">
@@ -196,7 +203,11 @@
             { label: 'TypeScript 5 (strict)', status: 'green', note: 'type-check passes' },
             { label: 'ESLint 9 flat config', status: 'green', note: 'lint passes' },
             { label: 'Prettier', status: 'green' },
-            { label: 'Jest + RTL + jest-axe', status: 'green', note: '10 tests, coverage gate met' },
+            {
+              label: 'Jest + RTL + jest-axe',
+              status: 'green',
+              note: '10 tests, coverage gate met',
+            },
             { label: 'Storybook 8', status: 'green', note: 'builds' },
             { label: 'Husky pre-commit / commit-msg', status: 'green' },
             { label: 'GitHub Actions CI', status: 'blue', note: 'WP0 remaining' },
@@ -209,7 +220,11 @@
             { label: 'Providers (Query / Theme / i18n)', status: 'green' },
             { label: 'Global ErrorBoundary', status: 'green' },
             { label: 'TanStack Router', status: 'green', note: 'code-based, 1 route' },
-            { label: 'Theming (light/dark/high-contrast)', status: 'green', note: 'CSS var tokens' },
+            {
+              label: 'Theming (light/dark/high-contrast)',
+              status: 'green',
+              note: 'CSS var tokens',
+            },
             { label: 'i18n (en/nl, type-safe keys)', status: 'green' },
           ],
         },
@@ -252,9 +267,39 @@
           items: [
             { label: 'README.md', status: 'green' },
             { label: 'AGENTS.md', status: 'green' },
-            { label: 'docs/Technical-Architecture-Plan.md', status: 'blue' },
-            { label: 'docs/agents/* (7 files)', status: 'blue' },
-            { label: 'docs/adr/ (+ ADR-0001)', status: 'blue' },
+            { label: 'docs/Technical-Architecture-Plan.md', status: 'green' },
+            { label: 'docs/agents/* (8 role cards)', status: 'green' },
+            { label: 'docs/adr/ (template + ADR-0001)', status: 'green' },
+            { label: 'docs/specs/ (Scope)', status: 'green', note: 'scaffolded, empty until WP1' },
+            {
+              label: 'docs/design-notes/ (Pixel)',
+              status: 'green',
+              note: 'scaffolded, empty until WP1',
+            },
+            {
+              label: 'docs/performance/ (Watt)',
+              status: 'green',
+              note: 'budgets + nginx guidance scaffolded',
+            },
+          ],
+        },
+        {
+          title: 'Performance (embedded Linux + nginx)',
+          items: [
+            { label: 'Bundle vendor chunking', status: 'green', note: '~122 KB gz, under budget' },
+            {
+              label: 'Route-based code splitting',
+              status: 'blue',
+              note: 'lazy routes with features',
+            },
+            { label: 'Lighthouse CI (@lhci/cli)', status: 'blue', note: 'needs dep approval' },
+            {
+              label: 'Core Web Vitals budgets',
+              status: 'blue',
+              note: 'confirm on target HW (WP4)',
+            },
+            { label: 'Precompressed assets (brotli/gzip)', status: 'blue' },
+            { label: 'nginx serving spec', status: 'blue', note: 'advisory; customer applies' },
           ],
         },
       ];
@@ -314,13 +359,21 @@
           // for unknown paths): only treat a real JSON response as "up".
           const isJson = (res.headers.get('content-type') ?? '').includes('application/json');
           if (res.ok && isJson) {
-            rest.replaceWith(probeItem('REST API', 'green', CONFIG.restHealthUrl + ' → ' + res.status));
+            rest.replaceWith(
+              probeItem('REST API', 'green', CONFIG.restHealthUrl + ' → ' + res.status),
+            );
           } else if (res.ok) {
             rest.replaceWith(
-              probeItem('REST API', 'red', CONFIG.restHealthUrl + ' → 200 but not JSON (no backend/mock)'),
+              probeItem(
+                'REST API',
+                'red',
+                CONFIG.restHealthUrl + ' → 200 but not JSON (no backend/mock)',
+              ),
             );
           } else {
-            rest.replaceWith(probeItem('REST API', 'red', CONFIG.restHealthUrl + ' → ' + res.status));
+            rest.replaceWith(
+              probeItem('REST API', 'red', CONFIG.restHealthUrl + ' → ' + res.status),
+            );
           }
         } catch {
           rest.replaceWith(probeItem('REST API', 'red', CONFIG.restHealthUrl + ' → unreachable'));

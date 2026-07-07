@@ -76,19 +76,20 @@ Any deviation from the architecture requires an ADR in [`docs/adr/`](docs/adr/),
 
 ## The team & who owns what
 
-The project runs with **3 human members** and **7 virtual teammates**. Each virtual
+The project runs with **3 human members** and **8 virtual teammates**. Each virtual
 teammate has a name, a role, and a dedicated instruction file. When acting as a teammate,
 load that file as your working context.
 
-| Teammate  | Role                       | Instruction file                                                       | Owns                                                                    |
-| --------- | -------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Solid** | Solution Architect         | [`docs/agents/SolutionArchitect.md`](docs/agents/SolutionArchitect.md) | Architecture boundaries, ADRs, dependency rules, PR architecture review |
-| **Vibe**  | Senior Front-end Developer | [`docs/agents/Developer.md`](docs/agents/Developer.md)                 | Coding standards, component patterns, naming, implementation            |
-| **Scope** | Business Analyst           | [`docs/agents/BusinessAnalyst.md`](docs/agents/BusinessAnalyst.md)     | Requirements, Gherkin acceptance criteria, documenting what was built   |
-| **Probe** | Tester / QA                | [`docs/agents/Tester.md`](docs/agents/Tester.md)                       | Test strategy, coverage, Arrange-Act-Assert patterns, traceability      |
-| **Aegis** | Security specialist        | [`docs/agents/Security.md`](docs/agents/Security.md)                   | OWASP checks, secure patterns, dependency audit                         |
-| **Pixel** | UX / Design Guardian       | [`docs/agents/UXGuardian.md`](docs/agents/UXGuardian.md)               | Figma adherence, correct Untitled UI usage, a11y                        |
-| **Flux**  | DevOps                     | [`docs/agents/DevOps.md`](docs/agents/DevOps.md)                       | CI/CD, Vite build config, embedded Linux deployment                     |
+| Teammate  | Role                       | Instruction file                                                           | Owns                                                                       |
+| --------- | -------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **Solid** | Solution Architect         | [`docs/agents/SolutionArchitect.md`](docs/agents/SolutionArchitect.md)     | Architecture boundaries, ADRs, dependency rules, PR architecture review    |
+| **Vibe**  | Senior Front-end Developer | [`docs/agents/Developer.md`](docs/agents/Developer.md)                     | Coding standards, component patterns, naming, implementation               |
+| **Scope** | Business Analyst           | [`docs/agents/BusinessAnalyst.md`](docs/agents/BusinessAnalyst.md)         | Requirements, Gherkin acceptance criteria, documenting what was built      |
+| **Probe** | Tester / QA                | [`docs/agents/Tester.md`](docs/agents/Tester.md)                           | Test strategy, coverage, Arrange-Act-Assert patterns, traceability         |
+| **Aegis** | Security specialist        | [`docs/agents/Security.md`](docs/agents/Security.md)                       | OWASP checks, secure patterns, dependency audit                            |
+| **Pixel** | UX / Design Guardian       | [`docs/agents/UXGuardian.md`](docs/agents/UXGuardian.md)                   | Figma adherence, correct Untitled UI usage, a11y                           |
+| **Flux**  | DevOps                     | [`docs/agents/DevOps.md`](docs/agents/DevOps.md)                           | CI/CD, Vite build config, embedded Linux deployment                        |
+| **Watt**  | Performance Engineer       | [`docs/agents/PerformanceEngineer.md`](docs/agents/PerformanceEngineer.md) | Runtime performance, profiling, budgets, Lighthouse, embedded/nginx tuning |
 
 **The three human members** (Solution Architect, Senior Front-end Developer, Business
 Analyst) direct, review and are accountable for the virtual teammates' output. AI teammates
@@ -107,7 +108,8 @@ Follow this order — it is a TDD loop, not a suggestion:
 5. **Pixel** verifies the visual output against Figma via Storybook.
 6. **Aegis** reviews any security-sensitive change against the OWASP checklist.
 7. **Flux** ensures CI/build/deploy stay green and within budget.
-8. A **human** reviews and approves the PR.
+8. **Watt** checks performance budgets on perf-sensitive changes (measured under device-like throttling).
+9. A **human** reviews and approves the PR.
 
 ---
 
