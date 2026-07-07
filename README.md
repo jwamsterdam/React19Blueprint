@@ -9,7 +9,9 @@ operator portal.
 
 > **Status:** Pre-project blueprint. This repository is being set up ahead of contract
 > award to prove the proposed architecture, tooling and (human + AI) delivery model can
-> deliver what the proposal promises.
+> deliver what the proposal promises. Client-owned artifacts such as OpenAPI, AsyncAPI,
+> Figma files, target hardware details and deployment access are not available yet, so
+> client-dependent implementation is intentionally deferred.
 
 ---
 
@@ -65,8 +67,8 @@ development, final translated content, and product/business requirements definit
 | Component docs         | **Storybook 8**                                                     |
 | Linting / formatting   | **ESLint 9** (flat config) + **Prettier**                           |
 | Git hooks              | **Husky** + **lint-staged** + **commitlint** (Conventional Commits) |
-| Static analysis        | **SonarCloud** (Quality Gate blocks merges)                         |
-| Dependency security    | **npm audit** (CI) + **Dependabot** / Snyk                          |
+| Static analysis        | **SonarCloud** (planned Quality Gate once project access exists)    |
+| Dependency security    | **npm audit** (CI) + **Dependabot** once repository settings exist  |
 | Bundle analysis        | **rollup-plugin-visualizer** (every production build)               |
 
 Full rationale for every choice lives in [`docs/Technical-Architecture-Plan.md`](docs/Technical-Architecture-Plan.md)
@@ -162,9 +164,12 @@ architecture-compliant and consistent. See [`AGENTS.md`](AGENTS.md) for the full
 | Cognitive complexity / function                     | ≤ 15                                          |
 | Initial JS bundle                                   | < 300 KB gzipped _(to confirm with customer)_ |
 
-**CI pipeline (every PR):** install → type-check → lint → unit tests + coverage →
-SonarCloud Quality Gate → `npm audit` (critical = fail) → Vite build → bundle report.
-Cypress E2E runs nightly and on release branches.
+**CI pipeline active today:** install → type-check → lint → unit tests + coverage →
+Vite build → bundle-budget check → dependency audit (critical = fail).
+
+**Planned once project access/artifacts exist:** SonarCloud Quality Gate, Cypress E2E
+nightly/release workflows, Lighthouse CI under device-like throttling, and generated API
+contract checks.
 
 **Pre-commit:** `lint-staged` (eslint --fix → prettier → `tsc --noEmit`) + `commitlint`.
 
@@ -176,7 +181,7 @@ Cypress E2E runs nightly and on release branches.
 npm install     # installs dependencies + activates Husky git hooks
 ```
 
-**Works today** — the skeleton, all verified in CI:
+**Works today** — the skeleton, verified locally and in CI where external access allows:
 
 ```bash
 npm run dev            # Vite dev server (app shell + sample dashboard)
@@ -189,18 +194,17 @@ npm run check:bundle   # gzipped bundle-budget gate
 npm run check:audit    # dependency audit (critical = fail)
 ```
 
-**Not wired yet — activated during WP0.** These require artifacts/config that do not exist
-in the repo yet and will error until then:
+**Scaffolded today, activated after contract award / client intake:**
 
 ```bash
-npm run generate:api   # needs customer openapi.yaml + an openapi-ts.config.ts
+npm run generate:api   # needs customer openapi.yaml + an openapi-ts.config.ts decision
 npm run generate:ws    # needs customer asyncapi.yaml
 npm run test:e2e       # needs cypress.config.ts + specs
-# MSW request mocking   # handlers not set up yet
 ```
 
 **Prerequisites:** Node.js 22 (see [`.nvmrc`](.nvmrc)), npm. Customer-provided `openapi.yaml` /
-`asyncapi.yaml` specs are required for API codegen; MSW mocks will bridge the gap once set up.
+`asyncapi.yaml` specs are required for API codegen. A small MSW-backed zones example exists
+to prove the development/test pattern until real contracts arrive.
 
 ---
 
@@ -234,6 +238,7 @@ Ordered to respect dependencies and the mid-2027 intermediate milestone
 - [`docs/agents/`](docs/agents/) — role-specific instruction files for each virtual teammate
 - [`docs/delivery-workflow.md`](docs/delivery-workflow.md) — steering model + review routing matrix
 - [`docs/repo-setup.md`](docs/repo-setup.md) — GitHub settings, secrets & client artifacts to finish setup
+- [`docs/client-readiness-checklist.md`](docs/client-readiness-checklist.md) — client intake items needed after contract award
 - [`docs/conventions/`](docs/conventions/) — applied coding, architecture, testing, API, UI & git standards
 - [`docs/adr/`](docs/adr/) — Architecture Decision Records (+ [template](docs/adr/template.md))
 - [`docs/specs/`](docs/specs/) — durable feature acceptance criteria (owned by Scope)

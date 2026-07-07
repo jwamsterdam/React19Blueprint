@@ -16,6 +16,7 @@ export default {
         },
         fg: {
           primary: 'var(--color-fg-primary)',
+          'on-brand': 'var(--color-fg-on-brand)',
         },
       },
     },

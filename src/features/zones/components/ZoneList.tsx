@@ -28,7 +28,9 @@ export function ZoneList({ zones, selectedId, onSelect }: ZoneListProps): React.
               aria-current={isSelected}
               className={cn(
                 'w-full rounded-md px-3 py-2 text-left transition',
-                isSelected ? 'bg-brand-primary text-white' : 'bg-bg-secondary text-fg-primary',
+                isSelected
+                  ? 'bg-brand-primary text-fg-on-brand'
+                  : 'bg-bg-secondary text-fg-primary',
               )}
             >
               <span className="font-medium">{zone.name}</span>

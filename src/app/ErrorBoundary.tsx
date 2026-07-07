@@ -21,7 +21,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   public override componentDidCatch(error: Error, info: ErrorInfo): void {
-    // TODO: forward to the platform logging endpoint once available.
+    // Kickoff: replace console fallback once the client confirms the UI logging endpoint.
     // eslint-disable-next-line no-console
     console.error('Unhandled UI error', error, info);
   }

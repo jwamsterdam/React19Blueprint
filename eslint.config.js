@@ -12,7 +12,8 @@ import prettier from 'eslint-config-prettier';
 // only ever come from theme tokens (bg-brand-primary, text-fg-primary, …).
 const TAILWIND_PALETTE =
   '(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)';
-const HARDCODED_COLOUR_SELECTOR = `Literal[value=/(?:^|\\s)(?:text|bg|border|ring|divide|from|via|to|fill|stroke|shadow|outline|decoration|accent|caret|placeholder)-${TAILWIND_PALETTE}-[0-9]{2,3}\\b/]`;
+const TAILWIND_FIXED_COLOURS = '(?:black|white|transparent|current)';
+const HARDCODED_COLOUR_SELECTOR = `Literal[value=/(?:^|\\s)(?:text|bg|border|ring|divide|from|via|to|fill|stroke|shadow|outline|decoration|accent|caret|placeholder)-(?:${TAILWIND_PALETTE}-[0-9]{2,3}|${TAILWIND_FIXED_COLOURS})\\b/]`;
 
 export default tseslint.config(
   {

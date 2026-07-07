@@ -41,7 +41,9 @@ Add when the corresponding integration is enabled:
 
 ## 5. Client-provided artifacts (drop in when available)
 
-These unblock the Tier-C items — see the status page:
+These unblock the deferred implementation items. Keep the fuller intake list in
+[`client-readiness-checklist.md`](client-readiness-checklist.md) up to date as kickoff
+questions are answered:
 
 - [ ] `openapi.yaml` + an `openapi-ts.config.ts` → `npm run generate:api` (REST client)
 - [ ] `asyncapi.yaml` → `npm run generate:ws` (WebSocket event types)
