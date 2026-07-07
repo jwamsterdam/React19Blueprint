@@ -6,3 +6,6 @@ src/api
 *.gen.ts
 package-lock.json
 stats.html
+
+# symlink to AGENTS.md — not formattable
+CLAUDE.md

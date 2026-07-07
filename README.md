@@ -172,33 +172,35 @@ Cypress E2E runs nightly and on release branches.
 
 ## 6. Getting Started
 
-> Scaffolding is in progress (Work Package 0 — Foundation & Tooling). Commands below reflect
-> the target setup and will become live as WP0 lands.
-
 ```bash
-# Install dependencies
-npm install
-
-# Generate API clients from the customer-provided specs
-npm run generate:api        # REST  (OpenAPI  → src/api/rest/)
-npm run generate:ws         # WebSocket (AsyncAPI → src/api/ws/)
-
-# Develop (MSW mocks active — no backend required)
-npm run dev
-
-# Quality
-npm run type-check          # tsc --noEmit
-npm run lint                # eslint
-npm run test                # jest + coverage
-npm run test:e2e            # cypress
-npm run storybook           # component docs / design system
-
-# Production build
-npm run build               # vite build (+ bundle analysis)
+npm install     # installs dependencies + activates Husky git hooks
 ```
 
-**Prerequisites:** Node.js LTS, npm. Customer-provided `openapi.yaml` / `asyncapi.yaml`
-specs are required for API codegen (MSW mocks bridge the gap until then).
+**Works today** — the skeleton, all verified in CI:
+
+```bash
+npm run dev            # Vite dev server (app shell + sample dashboard)
+npm run type-check     # tsc --noEmit (strict)
+npm run lint           # ESLint 9 (+ architecture / a11y / colour gates)
+npm run test           # Jest + RTL + jest-axe (coverage gate)
+npm run storybook      # component docs / design system
+npm run build          # production build
+npm run check:bundle   # gzipped bundle-budget gate
+npm run check:audit    # dependency audit (critical = fail)
+```
+
+**Not wired yet — activated during WP0.** These require artifacts/config that do not exist
+in the repo yet and will error until then:
+
+```bash
+npm run generate:api   # needs customer openapi.yaml + an openapi-ts.config.ts
+npm run generate:ws    # needs customer asyncapi.yaml
+npm run test:e2e       # needs cypress.config.ts + specs
+# MSW request mocking   # handlers not set up yet
+```
+
+**Prerequisites:** Node.js 22 (see [`.nvmrc`](.nvmrc)), npm. Customer-provided `openapi.yaml` /
+`asyncapi.yaml` specs are required for API codegen; MSW mocks will bridge the gap once set up.
 
 ---
 
